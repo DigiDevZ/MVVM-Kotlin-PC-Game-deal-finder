@@ -14,7 +14,7 @@ import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
 /**
  * Created by Zakarie Ortiz on 1/11/21.
  */
-class GameListAdapter : PagingDataAdapter<GameListLookup, GameListAdapter.GameViewHolder>(
+class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAdapter<GameListLookup, GameListAdapter.GameViewHolder>(
     GAME_COMPARATOR
 ) {
 
@@ -35,8 +35,20 @@ class GameListAdapter : PagingDataAdapter<GameListLookup, GameListAdapter.GameVi
 
     }
 
-    class GameViewHolder(private val binding: ItemGameListingBinding) :
+    inner class GameViewHolder(private val binding: ItemGameListingBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.OnItemClick(item)
+                    }
+                }
+            }
+        }
 
         fun bind(game: GameListLookup) {
             binding.apply {
@@ -57,6 +69,10 @@ class GameListAdapter : PagingDataAdapter<GameListLookup, GameListAdapter.GameVi
             }
         }
 
+    }
+
+    interface OnItemClickListener {
+        fun OnItemClick(game: GameListLookup)
     }
 
     companion object {

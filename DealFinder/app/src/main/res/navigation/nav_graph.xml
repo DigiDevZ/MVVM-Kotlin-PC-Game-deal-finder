@@ -8,6 +8,22 @@
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.ortizzakarie.dealfinder.viewModel.searchResult.SearchResultFragment"
-        android:label="fragment_search_result"
-        tools:layout="@layout/fragment_search_result" />
+        android:label="Search"
+        tools:layout="@layout/fragment_search_result">
+        <action
+            android:id="@+id/action_searchResultFragment_to_gameDetailsFragment"
+            app:destination="@id/gameDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailsFragment"
+        android:name="com.ortizzakarie.dealfinder.viewModel.gameDetails.GameDetailsFragment"
+        android:label="{gameTitle}"
+        tools:layout="@layout/fragment_game_details" >
+        <argument
+            android:name="game"
+            app:argType="com.ortizzakarie.dealfinder.model.dataModels.GameListLookup" />
+        <argument
+            android:name="gameTitle"
+            app:argType="string" />
+    </fragment>
 </navigation>
