@@ -6,16 +6,34 @@
 
 ## Purpose 
 
+# Tech
+
 ## Kotlin & Android Technology used/why
-- Kotlin Flow - Practice
+
 - Kotlin Coroutines - Practice
 - ViewBinding - Practice
-- StateFlow - Google is pushing this over LiveData*
-- MaterialDesign - GoTo library for Android UI elements.
+- Paging3 - Handle loading data that is from an api response and can be potentially infinite.
+- LiveData - React properly to when data is ready/gone
+- MaterialDesign - GoTo library for Android UI elements
 - Room - Local offline storage*
-- DaggerHilt - Dependency Injection*
-- GSON - Serialization*
+- DaggerHilt - Dependency Injection
+- GSON - Serialization/Deserialization
 - SharedElements - Allows for more complex animations across fragments*
 
+- Kotlin Flow/StateFlow - Google is pushing this over LiveData*
+
 ## Third Party Technology used/why
-- Coil or Glide not sure yet - Image Loading*
+- Glide - Image Loading
+
+# Features
+Coming soon*
+
+# API Reference
+
+This app is powered by the CheapShark Api. 
+
+# Tests 
+Coming soon*
+
+# License 
+Coming soon*
