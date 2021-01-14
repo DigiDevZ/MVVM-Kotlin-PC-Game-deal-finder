@@ -1,9 +1,6 @@
 # MVVM-Kotlin-PC-Game-deal-finder
 [Kotlin] Android App for finding deals on PC games, data derived from the CheapShark API.
 
-# To view most up to date and current work, please select "dev" branch.
-
-
 ## Purpose 
 
 # Tech
@@ -26,7 +23,7 @@
 - Glide - Image Loading
 
 # Features
-Coming soon*
+- Users can search for almost any game and see the results!.
 
 # API Reference
 
