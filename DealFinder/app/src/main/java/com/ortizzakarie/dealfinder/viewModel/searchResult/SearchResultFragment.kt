@@ -28,10 +28,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameListAdapter.OnItemClickListener {
 
+    //In the future if I add more SearchResultFragments I will call this one GameSearchResultFragment.
+
     private val TAG = "SRFragment.TAG"
     
     private val viewModel by viewModels<SearchResultViewModel>()
 
+    //TODO: Need to doc out the specific reasoning for this binding var and val to be like this.
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
 
@@ -45,6 +48,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
         binding.apply {
             rvGames.setHasFixedSize(true)
             rvGames.itemAnimator = null
+            //Gives custom adapter to the header and footer of the recycler view, utilizing LoadStateAdapter.
             rvGames.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = GameListLoadStateAdapter { adapter.retry() },
                 footer = GameListLoadStateAdapter { adapter.retry() }
@@ -59,6 +63,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
+        //Load State listener so that the user can be informed when data fetching is happening, and if an error occurs a retry button can be displayed.
         adapter.addLoadStateListener { loadState ->
             binding.apply {
                 progressBarCircular.isVisible = loadState.source.refresh is LoadState.Loading
@@ -67,7 +72,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
                 tvLoadError.isVisible = loadState.source.refresh is LoadState.Error
                 ivLoadError.isVisible = loadState.source.refresh is LoadState.Error
 
-                //Empty recycler view handling.
+                //Loading error handling.
                 if (loadState.source.refresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
                     rvGames.isVisible = false
@@ -96,26 +101,23 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
         val searchItem = menu.findItem(R.id.action_search)
         val customSearchView = searchItem.actionView as EmptySubmitSearchView
 
-
+        //Implemented custom search view class [EmptySubmitSearchView] to handle search queries that are empty.
         customSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
 
                     if (query.isEmpty() || query.isBlank()) {
-                        Log.i(TAG, "onQueryTextSubmit: query is blank or empty")
-                        displayToast("Please do not leave search field empty.", Toast.LENGTH_SHORT)
+                        displayToast(getString(R.string.search_empty_search_field), Toast.LENGTH_SHORT)
+                        customSearchView.clearFocus()
+                    }else {
+                        binding.rvGames.scrollToPosition(0)
+                        viewModel.searchGames(query)
+                        customSearchView.clearFocus()
                     }
-
-                    binding.rvGames.scrollToPosition(0)
-                    viewModel.searchGames(query)
-                    customSearchView.clearFocus()
                 }
-
                 return true
             }
-
-
 
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -139,7 +141,6 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
     private fun displayToast(_text: String, _duration: Int) {
         Log.i(TAG, "displayToast: Toast displaying.")
         val toast = Toast.makeText(requireContext(), _text, _duration)
-        toast.setGravity(Gravity.TOP, 0, 10)
         toast.show()
     }
 

@@ -15,6 +15,14 @@ import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
 /**
  * Created by Zakarie Ortiz on 1/11/21.
  */
+
+/**
+ * [GameListAdapter] is extended from [PagingDataAdapter] and displays the custom GameListLookup item.
+ *
+ * @param listener = whatever fragment uses this adapter must also implement this listener.
+ *
+ */
+
 class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAdapter<GameListLookup, GameListAdapter.GameViewHolder>(
     GAME_COMPARATOR
 ) {
@@ -32,13 +40,13 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
         if (currentItem != null) {
             holder.bind(currentItem)
         }
-
-
     }
 
     inner class GameViewHolder(private val binding: ItemGameListingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        //On init set the onClickListener for the entire root layout.
+        // This layout corresponds to the GameItem in the search results fragment.
         init {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
@@ -74,11 +82,13 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
 
     }
 
+    //OnItemClickListener to send game data for navigation.
     interface OnItemClickListener {
         fun onItemClick(game: GameListLookup)
     }
 
     companion object {
+        //All adapters extending PagingDataAdapter must provide their own COMPARATOR object.
         private val GAME_COMPARATOR = object : DiffUtil.ItemCallback<GameListLookup>() {
 
             override fun areItemsTheSame(oldItem: GameListLookup, newItem: GameListLookup) =

@@ -21,8 +21,6 @@ class SearchResultViewModel @ViewModelInject constructor(
     //games is a reactive val that is "activated" whenever currentQuery has it's values changed.
     // the following function will call the repository to view the search results of the currentQuery string.
     val games = currentQuery.switchMap { queryString ->
-
-
         repository.getSearchResultsListGameLookup(queryString).cachedIn(viewModelScope)
     }
 
@@ -34,7 +32,8 @@ class SearchResultViewModel @ViewModelInject constructor(
     companion object {
         private const val CURRENT_QUERY = "current_query"
 
-        //If default is left blank, it will provide an error.
+        //TODO: Give the search results fragment a "search for game" UI element that is displayed when the fragment is opened for the first time.
+        // this will happen when a home fragment is introduced.
         private const val DEFAULT_QUERY = ""
     }
 }

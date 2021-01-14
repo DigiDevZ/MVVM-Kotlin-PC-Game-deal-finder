@@ -19,4 +19,5 @@ interface CheapSharkApi {
         @Query("title") title: String
     ): List<GameListLookup>
 
+    //TODO: Add the other api endpoints in here.
 }
