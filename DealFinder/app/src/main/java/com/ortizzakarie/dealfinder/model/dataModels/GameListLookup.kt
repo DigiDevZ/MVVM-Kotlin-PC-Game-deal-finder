@@ -14,5 +14,4 @@ data class GameListLookup(
     val cheapestDealID: String,
     val external: String,
     val thumb: String
-) : Parcelable {
-}
+) : Parcelable

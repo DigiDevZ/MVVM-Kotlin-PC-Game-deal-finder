@@ -15,7 +15,7 @@
         android:id="@+id/tv_loadError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Results could not be loaded"
+        android:text="@string/search_load_error"
         android:textColor="@android:color/black"
         android:textSize="14sp" />
 
@@ -23,6 +23,6 @@
         android:id="@+id/btn_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retry"/>
+        android:text="@string/search_load_retry" />
 
 </LinearLayout>

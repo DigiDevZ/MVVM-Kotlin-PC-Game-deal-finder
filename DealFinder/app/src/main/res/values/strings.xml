@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DealFinder</string>
+
+
+    <string name="search">search</string>
+    <string name="search_load_error">Results could not be loaded</string>
+    <string name="search_no_results">No games found fo search</string>
+    <string name="search_load_retry">Retry</string>
 </resources>

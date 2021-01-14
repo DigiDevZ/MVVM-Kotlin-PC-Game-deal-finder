@@ -18,7 +18,7 @@
         android:id="@+id/gameDetailsFragment"
         android:name="com.ortizzakarie.dealfinder.viewModel.gameDetails.GameDetailsFragment"
         android:label="{gameTitle}"
-        tools:layout="@layout/fragment_game_details" >
+        tools:layout="@layout/fragment_game_details">
         <argument
             android:name="game"
             app:argType="com.ortizzakarie.dealfinder.model.dataModels.GameListLookup" />

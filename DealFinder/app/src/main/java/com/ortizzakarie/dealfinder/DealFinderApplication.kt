@@ -7,6 +7,4 @@ import dagger.hilt.android.HiltAndroidApp
  * Created by Zakarie Ortiz on 1/11/21.
  */
 @HiltAndroidApp
-class DealFinderApplication : Application() {
-
-}
+class DealFinderApplication : Application()

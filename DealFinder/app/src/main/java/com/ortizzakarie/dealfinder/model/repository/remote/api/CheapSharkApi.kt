@@ -1,10 +1,7 @@
 package com.ortizzakarie.dealfinder.model.repository.remote.api
 
 import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
-import com.ortizzakarie.dealfinder.model.repository.remote.response.GameListResponse
-import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Query
 
 /**

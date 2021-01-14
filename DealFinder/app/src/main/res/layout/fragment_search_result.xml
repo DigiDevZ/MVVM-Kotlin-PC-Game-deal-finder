@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Results could not be loaded"
+        android:text="@string/search_load_error"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:visibility="gone"
@@ -45,26 +45,26 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_error_outline_24"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/btn_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/search_load_retry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_loadError"
-        android:text="Retry"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_loadError" />
 
     <TextView
         android:id="@+id/tv_noSearchResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No games found for search"
+        android:text="@string/search_no_results"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:visibility="gone"

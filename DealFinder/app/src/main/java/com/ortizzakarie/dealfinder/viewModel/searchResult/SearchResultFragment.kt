@@ -1,9 +1,12 @@
 package com.ortizzakarie.dealfinder.viewModel.searchResult
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,11 +19,8 @@ import com.ortizzakarie.dealfinder.databinding.FragmentSearchResultBinding
 import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListAdapter
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListLoadStateAdapter
+import com.ortizzakarie.dealfinder.viewModel.searchResult.searchView.EmptySubmitSearchView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_search_result.*
-import kotlinx.android.synthetic.main.game_load_state_footer.*
-import kotlinx.android.synthetic.main.game_load_state_footer.progress_bar_circular
-import kotlinx.android.synthetic.main.game_load_state_footer.tv_loadError
 
 /**
  * Created by Zakarie Ortiz on 1/11/21.
@@ -28,6 +28,8 @@ import kotlinx.android.synthetic.main.game_load_state_footer.tv_loadError
 @AndroidEntryPoint
 class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameListAdapter.OnItemClickListener {
 
+    private val TAG = "SRFragment.TAG"
+    
     private val viewModel by viewModels<SearchResultViewModel>()
 
     private var _binding: FragmentSearchResultBinding? = null
@@ -81,7 +83,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
         setHasOptionsMenu(true)
     }
 
-    override fun OnItemClick(game: GameListLookup) {
+    override fun onItemClick(game: GameListLookup) {
         val action = SearchResultFragmentDirections.actionSearchResultFragmentToGameDetailsFragment(game, game.external)
         findNavController().navigate(action)
     }
@@ -92,19 +94,29 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
         inflater.inflate(R.menu.menu_search, menu)
 
         val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
+        val customSearchView = searchItem.actionView as EmptySubmitSearchView
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+        customSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
+
+                    if (query.isEmpty() || query.isBlank()) {
+                        Log.i(TAG, "onQueryTextSubmit: query is blank or empty")
+                        displayToast("Please do not leave search field empty.", Toast.LENGTH_SHORT)
+                    }
+
                     binding.rvGames.scrollToPosition(0)
                     viewModel.searchGames(query)
-                    searchView.clearFocus()
+                    customSearchView.clearFocus()
                 }
 
                 return true
             }
+
+
+
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
@@ -117,8 +129,20 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
         _binding = null
     }
 
+    /**
+     * Display a UX message to the user.
+     *
+     * @param _text = message to display to user
+     * @param _duration = how long to display to user, only two options [Toast.LENGTH_LONG] & [Toast.LENGTH_SHORT]
+     */
+
+    private fun displayToast(_text: String, _duration: Int) {
+        Log.i(TAG, "displayToast: Toast displaying.")
+        val toast = Toast.makeText(requireContext(), _text, _duration)
+        toast.setGravity(Gravity.TOP, 0, 10)
+        toast.show()
+    }
+
 
 
 }
-
-//TODO: - Then go to episode 6 to complete the viewmodel portion.

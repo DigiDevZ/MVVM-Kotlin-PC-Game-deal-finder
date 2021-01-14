@@ -2,6 +2,7 @@ package com.ortizzakarie.dealfinder.viewModel.searchResult.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -44,7 +45,7 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
                 if (position != RecyclerView.NO_POSITION) {
                     val item = getItem(position)
                     if (item != null) {
-                        listener.OnItemClick(item)
+                        listener.onItemClick(item)
                     }
                 }
             }
@@ -64,15 +65,17 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
                 tvGameDiscountPrice.text = game.cheapest
 
                 //TODO: Change the two below when I figure out how to update and get that specific data.
-                tvGameRetailPrice.text = "DEV 404"
-                tvGameDiscountPercentage.text = "DEV 404"
+                tvGameRetailPrice.isVisible = false
+                tvGameDiscountPercentage.isVisible = false
+//                tvGameRetailPrice.text = "DEV 404"
+//                tvGameDiscountPercentage.text = "DEV 404"
             }
         }
 
     }
 
     interface OnItemClickListener {
-        fun OnItemClick(game: GameListLookup)
+        fun onItemClick(game: GameListLookup)
     }
 
     companion object {
