@@ -1,5 +1,7 @@
 package com.ortizzakarie.dealfinder.di
 
+import com.ortizzakarie.dealfinder.model.repository.CheapSharkRepository
+import com.ortizzakarie.dealfinder.model.repository.CheapSharkRepositoryInterface
 import com.ortizzakarie.dealfinder.model.repository.remote.api.CheapSharkApi
 import dagger.Module
 import dagger.Provides
@@ -30,5 +32,11 @@ object AppModule {
     fun provideCheapSharkApi(retrofit: Retrofit): CheapSharkApi =
         retrofit.create(CheapSharkApi::class.java)
 
+
+    @Provides
+    @Singleton
+    fun provideCheapSharkRepository(
+        api: CheapSharkApi
+    ) = CheapSharkRepository(api)
 
 }

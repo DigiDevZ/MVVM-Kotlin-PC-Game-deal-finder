@@ -74,12 +74,21 @@ dependencies {
 
 
     // Testing Libraries
+    implementation "org.mockito:mockito-core:$mockitoVersion"
+
+    //Local (test) Unit test
     testImplementation "junit:junit:$junitVersion"
+    testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+
+
+    //Instrumented (androidTest) Unit test
     androidTestImplementation "androidx.test.ext:junit:$testExtJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-
-    testImplementation "com.google.truth:truth:$truthVersion"
     androidTestImplementation "com.google.truth:truth:$truthVersion"
+
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$daggerHiltTestVersion"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$daggerHiltTestVersion"
 
 }
 

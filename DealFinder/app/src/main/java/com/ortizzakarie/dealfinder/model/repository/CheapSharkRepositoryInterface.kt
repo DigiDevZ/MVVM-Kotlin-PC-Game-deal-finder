@@ -1,5 +1,10 @@
 package com.ortizzakarie.dealfinder.model.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
+import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
+import com.ortizzakarie.dealfinder.utils.Resource
+
 /**
  * Created by Zakarie Ortiz on 1/15/21.
  */
@@ -14,6 +19,8 @@ package com.ortizzakarie.dealfinder.model.repository
 
 interface CheapSharkRepositoryInterface {
 
-    fun searchGameByTitle(query: String) : Any
-
+    //I don't like that I am returning Any here,
+    // If there is a way for me to setup this RepositoryInterface and it to have better testing with my project than  I will find it.
+    fun searchGameByTitle(query: String): Any
 }
+

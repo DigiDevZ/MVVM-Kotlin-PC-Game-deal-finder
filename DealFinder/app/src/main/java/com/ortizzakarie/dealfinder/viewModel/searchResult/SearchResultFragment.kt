@@ -2,7 +2,6 @@ package com.ortizzakarie.dealfinder.viewModel.searchResult
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
@@ -113,7 +112,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
                         customSearchView.clearFocus()
                     }else {
                         binding.rvGames.scrollToPosition(0)
-                        viewModel.searchGames(query)
+                        viewModel.searchForGames(query)
                         customSearchView.clearFocus()
                     }
                 }

@@ -1,4 +1,4 @@
-package com.ortizzakarie.dealfinder
+package com.ortizzakarie.dealfinder.utils
 
 import com.google.common.truth.Truth.assertThat
 import com.ortizzakarie.dealfinder.utils.ValidationUtil
