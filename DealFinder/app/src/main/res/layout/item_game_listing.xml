@@ -40,9 +40,10 @@
         android:id="@+id/tv_gameDiscountPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@id/tv_gameTitle"
+        app:layout_constraintEnd_toStartOf="@id/tv_gameRetailPrice"
         app:layout_constraintTop_toTopOf="@id/tv_gameRetailPrice"
         tools:text="$9.99" />
 
@@ -63,9 +64,10 @@
         android:id="@+id/tv_gameDiscountPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@id/tv_gameTitle"
+        app:layout_constraintStart_toEndOf="@id/tv_gameRetailPrice"
         app:layout_constraintTop_toTopOf="@id/tv_gameRetailPrice"
         tools:text="50%" />
 

@@ -21,7 +21,7 @@ class SearchResultViewModel @ViewModelInject constructor(
     //games is a reactive val that is "activated" whenever currentQuery has it's values changed.
     // the following function will call the repository to view the search results of the currentQuery string.
     val games = currentQuery.switchMap { queryString ->
-        repository.getSearchResultsListGameLookup(queryString).cachedIn(viewModelScope)
+        repository.searchGameByTitle(queryString).cachedIn(viewModelScope)
     }
 
     //searchGames is called whenever the user submits a search query.

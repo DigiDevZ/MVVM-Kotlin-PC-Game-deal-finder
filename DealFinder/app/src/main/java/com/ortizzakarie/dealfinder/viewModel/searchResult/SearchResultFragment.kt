@@ -17,6 +17,7 @@ import androidx.paging.LoadState
 import com.ortizzakarie.dealfinder.R
 import com.ortizzakarie.dealfinder.databinding.FragmentSearchResultBinding
 import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
+import com.ortizzakarie.dealfinder.utils.ValidationUtil
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListAdapter
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListLoadStateAdapter
 import com.ortizzakarie.dealfinder.viewModel.searchResult.searchView.EmptySubmitSearchView
@@ -107,7 +108,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
 
-                    if (query.isEmpty() || query.isBlank()) {
+                    if (!ValidationUtil.validateSearchQuery(query)) {
                         displayToast(getString(R.string.search_empty_search_field), Toast.LENGTH_SHORT)
                         customSearchView.clearFocus()
                     }else {
