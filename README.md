@@ -1,8 +1,6 @@
 # MVVM-Kotlin-PC-Game-deal-finder
 [Kotlin] Android App for finding deals on PC games, data derived from the CheapShark API.
 
-## Purpose 
-
 # Tech
 
 ## Kotlin & Android Technology used/why
@@ -20,10 +18,15 @@
 - Kotlin Flow/StateFlow - Google is pushing this over LiveData*
 
 ## Third Party Technology used/why
+
 - Glide - Image Loading
 
 # Features
+
 - Users can search for almost any game and see the results!.
+
+![](search_feature.gif)
+
 
 # API Reference
 
