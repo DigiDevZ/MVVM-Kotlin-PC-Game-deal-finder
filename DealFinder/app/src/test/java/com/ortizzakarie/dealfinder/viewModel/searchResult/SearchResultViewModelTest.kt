@@ -16,6 +16,8 @@ import org.mockito.MockitoAnnotations
 @ExperimentalCoroutinesApi
 class SearchResultViewModelTest {
 
+    //No need for tests since this view model has only one purpose right now.
+
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
@@ -27,12 +29,7 @@ class SearchResultViewModelTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-//        viewModel = SearchResultViewModel(FakeCheapSharkRepository(), state)
-    }
-
-    @Test
-    fun `search game by title returns results`() {
-
+        viewModel = SearchResultViewModel(FakeCheapSharkRepository(), state)
     }
 
 }

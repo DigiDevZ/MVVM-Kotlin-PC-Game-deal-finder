@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.ortizzakarie.dealfinder.R
 import com.ortizzakarie.dealfinder.databinding.ItemGameListingBinding
 import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
@@ -62,14 +63,21 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
         fun bind(game: GameListLookup) {
             binding.apply {
 
-                Glide.with(itemView)
-                    .load(game.thumb)
-                    .centerCrop()
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .error(R.drawable.ic_cloud_off_24)
-                    .into(ivGameThumbnail)
+                ivGameThumbnail.apply {
+                    transitionName = game.thumb
+
+                    Glide.with(itemView)
+                        .load(game.thumb)
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+//                        .apply(RequestOptions.formatOf()) test this out in the future.
+                        .error(R.drawable.ic_cloud_off_24)
+                        .into(this)
+                }
 
                 tvGameTitle.text = game.external
+                tvGameTitle.transitionName = game.external
+
                 tvGameDiscountPrice.text = game.cheapest
 
                 //TODO: Change the two below when I figure out how to update and get that specific data.

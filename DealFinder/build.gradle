@@ -45,6 +45,7 @@ ext {
     espressoVersion = '3.2.0'
     truthVersion = '1.0.1'
     mockitoVersion = '2.16.0'
+    mockitoKotlinVersion = '2.2.0'
     kotlinCoroutineTestVersion = '1.2.1'
     daggerHiltTestVersion = '2.28-alpha'
     glideVersion = '4.11.0'

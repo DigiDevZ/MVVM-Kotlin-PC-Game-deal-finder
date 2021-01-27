@@ -18,11 +18,11 @@
             <ImageView
                 android:id="@+id/iv_gameThumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_marginBottom="4dp"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                tools:layout_height="300dp"
+                android:scaleType="fitXY"
+                tools:layout_height="200dp"
                 tools:src="@mipmap/ic_launcher" />
 
             <TextView

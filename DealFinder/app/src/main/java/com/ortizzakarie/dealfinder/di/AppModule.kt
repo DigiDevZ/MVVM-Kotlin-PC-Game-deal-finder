@@ -37,6 +37,6 @@ object AppModule {
     @Singleton
     fun provideCheapSharkRepository(
         api: CheapSharkApi
-    ) = CheapSharkRepository(api)
+    ) = CheapSharkRepository(api) as CheapSharkRepositoryInterface
 
 }

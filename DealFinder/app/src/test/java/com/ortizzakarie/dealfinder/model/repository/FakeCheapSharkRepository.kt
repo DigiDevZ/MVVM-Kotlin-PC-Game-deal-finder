@@ -24,6 +24,8 @@ class FakeCheapSharkRepository :
     private val games = mutableListOf<GameListLookup>()
 
     private val observableGames = MutableLiveData<List<GameListLookup>>(games)
+    private val pagedGames = MutableLiveData<PagingData<GameListLookup>>()
+
 
     private var shouldReturnNetworkError = false
 
@@ -31,11 +33,9 @@ class FakeCheapSharkRepository :
         shouldReturnNetworkError = value
     }
 
-    override fun searchGameByTitle(query: String): Resource<List<GameListLookup>> {
-        return if (shouldReturnNetworkError) {
-            Resource.error("Error", null)
-        } else {
-            Resource.success(listOf())
-        }
+    override fun searchGameByTitle(query: String): LiveData<PagingData<GameListLookup>> {
+        return pagedGames
     }
+
+
 }

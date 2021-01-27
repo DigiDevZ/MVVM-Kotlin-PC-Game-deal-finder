@@ -74,13 +74,13 @@ dependencies {
 
 
     // Testing Libraries
-    implementation "org.mockito:mockito-core:$mockitoVersion"
 
     //Local (test) Unit test
     testImplementation "junit:junit:$junitVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
-
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
 
     //Instrumented (androidTest) Unit test
     androidTestImplementation "androidx.test.ext:junit:$testExtJunitVersion"

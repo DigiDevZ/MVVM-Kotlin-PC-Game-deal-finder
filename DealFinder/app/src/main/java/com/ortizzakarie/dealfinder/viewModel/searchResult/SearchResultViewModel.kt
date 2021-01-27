@@ -13,7 +13,7 @@ import com.ortizzakarie.dealfinder.model.repository.CheapSharkRepositoryInterfac
  * Created by Zakarie Ortiz on 1/11/21.
  */
 class SearchResultViewModel @ViewModelInject constructor(
-    private val repository: CheapSharkRepository,
+    private val repository: CheapSharkRepositoryInterface,
     @Assisted state: SavedStateHandle
 ) : ViewModel() {
 

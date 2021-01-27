@@ -21,6 +21,6 @@ interface CheapSharkRepositoryInterface {
 
     //I don't like that I am returning Any here,
     // If there is a way for me to setup this RepositoryInterface and it to have better testing with my project than  I will find it.
-    fun searchGameByTitle(query: String): Any
+    fun searchGameByTitle(query: String): LiveData<PagingData<GameListLookup>>
 }
 

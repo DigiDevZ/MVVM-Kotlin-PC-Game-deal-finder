@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.ortizzakarie.dealfinder.R
@@ -21,6 +22,7 @@ import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListAdapte
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListLoadStateAdapter
 import com.ortizzakarie.dealfinder.viewModel.searchResult.searchView.EmptySubmitSearchView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.item_game_listing.*
 
 /**
  * Created by Zakarie Ortiz on 1/11/21.
@@ -89,8 +91,14 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
     }
 
     override fun onItemClick(game: GameListLookup) {
-        val action = SearchResultFragmentDirections.actionSearchResultFragmentToGameDetailsFragment(game, game.external)
-        findNavController().navigate(action)
+
+        val extras = FragmentNavigatorExtras(
+            iv_gameThumbnail to game.thumb,
+            tv_gameTitle to game.external
+        )
+
+        val action = SearchResultFragmentDirections.actionSearchResultFragmentToGameDetailsFragment(game = game, gameTitle = game.external)
+        findNavController().navigate(action, extras)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

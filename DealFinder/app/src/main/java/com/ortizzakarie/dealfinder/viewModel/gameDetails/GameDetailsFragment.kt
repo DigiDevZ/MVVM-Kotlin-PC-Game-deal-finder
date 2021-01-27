@@ -2,6 +2,9 @@ package com.ortizzakarie.dealfinder.viewModel.gameDetails
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.transition.TransitionInflater
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -21,6 +24,10 @@ class GameDetailsFragment : Fragment(R.layout.fragment_game_details) {
 
     private val args by navArgs<GameDetailsFragmentArgs>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,36 +37,41 @@ class GameDetailsFragment : Fragment(R.layout.fragment_game_details) {
         binding.apply {
             val game = args.game
 
-            Glide.with(this@GameDetailsFragment)
-                .load(game.thumb)
-                .error(R.drawable.ic_error_outline_24)
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        progressBarCircular.isVisible = false
-                        return false
-                    }
+            ivGameThumbnail.apply {
+                transitionName = game.thumb
 
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        progressBarCircular.isVisible = false
-                        tvGameTitle.isVisible = true
-                        return false
-                    }
+                Glide.with(this@GameDetailsFragment)
+                    .load(game.thumb)
+                    .error(R.drawable.ic_error_outline_24)
+                    .listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            progressBarCircular.isVisible = false
+                            return false
+                        }
 
-                })
-                .into(ivGameThumbnail)
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            progressBarCircular.isVisible = false
+                            tvGameTitle.isVisible = true
+                            return false
+                        }
+
+                    })
+                    .into(this)
+            }
 
             tvGameTitle.text = game.external
+            tvGameTitle.transitionName = game.external
         }
     }
 
