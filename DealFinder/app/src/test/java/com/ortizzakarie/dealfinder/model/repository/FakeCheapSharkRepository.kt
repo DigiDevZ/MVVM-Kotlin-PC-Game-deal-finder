@@ -3,8 +3,7 @@ package com.ortizzakarie.dealfinder.model.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
-import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
-import com.ortizzakarie.dealfinder.utils.Resource
+import com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse
 
 /**
  * Created by Zakarie Ortiz on 1/15/21.
@@ -21,10 +20,10 @@ import com.ortizzakarie.dealfinder.utils.Resource
 class FakeCheapSharkRepository :
     CheapSharkRepositoryInterface {
 
-    private val games = mutableListOf<GameListLookup>()
+    private val games = mutableListOf<GameListLookupResponse>()
 
-    private val observableGames = MutableLiveData<List<GameListLookup>>(games)
-    private val pagedGames = MutableLiveData<PagingData<GameListLookup>>()
+    private val observableGames = MutableLiveData<List<GameListLookupResponse>>(games)
+    private val pagedGames = MutableLiveData<PagingData<GameListLookupResponse>>()
 
 
     private var shouldReturnNetworkError = false
@@ -33,7 +32,7 @@ class FakeCheapSharkRepository :
         shouldReturnNetworkError = value
     }
 
-    override fun searchGameByTitle(query: String): LiveData<PagingData<GameListLookup>> {
+    override fun searchGameByTitle(titleQuery: String): LiveData<PagingData<GameListLookupResponse>> {
         return pagedGames
     }
 

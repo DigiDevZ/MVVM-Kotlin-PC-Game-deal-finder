@@ -1,6 +1,8 @@
 package com.ortizzakarie.dealfinder.model.repository.remote.api
 
-import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
+import com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse
+import com.ortizzakarie.dealfinder.model.dataModels.GameLookupResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,7 +19,13 @@ interface CheapSharkApi {
     @GET("games")
     suspend fun searchGamesByTitle(
         @Query("title") title: String
-    ): List<GameListLookup>
+    ): List<GameListLookupResponse>
 
     //TODO: Add the other api endpoints in here.
+
+    @GET("games")
+    suspend fun searchGameDealsByGameId(
+        @Query("id") id: Int
+    ): Response<GameLookupResponse>
+
 }

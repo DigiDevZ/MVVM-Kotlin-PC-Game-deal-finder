@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_game_details">
         <argument
             android:name="game"
-            app:argType="com.ortizzakarie.dealfinder.model.dataModels.GameListLookup" />
+            app:argType="com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse" />
         <argument
             android:name="gameTitle"
             app:argType="string" />

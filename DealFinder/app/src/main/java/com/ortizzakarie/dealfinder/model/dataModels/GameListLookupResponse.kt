@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
  * Created by Zakarie Ortiz on 1/11/21.
  */
 @Parcelize
-data class GameListLookup(
+data class GameListLookupResponse(
     val gameID: String,
     val steamAppID: String,
     val cheapest: String,

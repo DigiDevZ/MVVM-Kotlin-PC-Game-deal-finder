@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.ortizzakarie.dealfinder.R
 import com.ortizzakarie.dealfinder.databinding.FragmentSearchResultBinding
-import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
+import com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse
 import com.ortizzakarie.dealfinder.utils.ValidationUtil
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListAdapter
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListLoadStateAdapter
@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.item_game_listing.*
 class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameListAdapter.OnItemClickListener {
 
     //In the future if I add more SearchResultFragments I will call this one GameSearchResultFragment.
-
+    //TODO: Get rid or rename below TAG.
     private val TAG = "SRFragment.TAG"
     
     private val viewModel by viewModels<SearchResultViewModel>()
@@ -90,7 +90,7 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
         setHasOptionsMenu(true)
     }
 
-    override fun onItemClick(game: GameListLookup) {
+    override fun onItemClick(game: GameListLookupResponse) {
 
         val extras = FragmentNavigatorExtras(
             iv_gameThumbnail to game.thumb,

@@ -8,23 +8,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.ortizzakarie.dealfinder.R
 import com.ortizzakarie.dealfinder.databinding.ItemGameListingBinding
-import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
+import com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse
 
 /**
  * Created by Zakarie Ortiz on 1/11/21.
  */
 
 /**
- * [GameListAdapter] is extended from [PagingDataAdapter] and displays the custom GameListLookup item.
+ * [GameListAdapter] is extended from [PagingDataAdapter] and displays the custom GameListLookupResponse item.
  *
  * @param listener = whatever fragment uses this adapter must also implement this listener.
  *
  */
 
-class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAdapter<GameListLookup, GameListAdapter.GameViewHolder>(
+class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAdapter<GameListLookupResponse, GameListAdapter.GameViewHolder>(
     GAME_COMPARATOR
 ) {
 
@@ -60,7 +59,7 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
             }
         }
 
-        fun bind(game: GameListLookup) {
+        fun bind(game: GameListLookupResponse) {
             binding.apply {
 
                 ivGameThumbnail.apply {
@@ -92,17 +91,17 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
 
     //OnItemClickListener to send game data for navigation.
     interface OnItemClickListener {
-        fun onItemClick(game: GameListLookup)
+        fun onItemClick(game: GameListLookupResponse)
     }
 
     companion object {
         //All adapters extending PagingDataAdapter must provide their own COMPARATOR object.
-        private val GAME_COMPARATOR = object : DiffUtil.ItemCallback<GameListLookup>() {
+        private val GAME_COMPARATOR = object : DiffUtil.ItemCallback<GameListLookupResponse>() {
 
-            override fun areItemsTheSame(oldItem: GameListLookup, newItem: GameListLookup) =
+            override fun areItemsTheSame(oldItem: GameListLookupResponse, newItem: GameListLookupResponse) =
                 oldItem.gameID == newItem.gameID
 
-            override fun areContentsTheSame(oldItem: GameListLookup, newItem: GameListLookup) =
+            override fun areContentsTheSame(oldItem: GameListLookupResponse, newItem: GameListLookupResponse) =
                 oldItem == newItem
         }
     }

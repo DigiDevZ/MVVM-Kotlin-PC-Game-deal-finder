@@ -2,7 +2,8 @@ package com.ortizzakarie.dealfinder.model.repository
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
-import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
+import com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse
+import com.ortizzakarie.dealfinder.model.dataModels.GameLookupResponse
 import com.ortizzakarie.dealfinder.utils.Resource
 
 /**
@@ -19,8 +20,8 @@ import com.ortizzakarie.dealfinder.utils.Resource
 
 interface CheapSharkRepositoryInterface {
 
-    //I don't like that I am returning Any here,
-    // If there is a way for me to setup this RepositoryInterface and it to have better testing with my project than  I will find it.
-    fun searchGameByTitle(query: String): LiveData<PagingData<GameListLookup>>
+    fun searchGameByTitle(titleQuery: String): LiveData<PagingData<GameListLookupResponse>>
+
+    suspend fun searchGameDetailsByGameId(idQuery: Int): Resource<GameLookupResponse>
 }
 
