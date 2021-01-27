@@ -1,5 +1,6 @@
 package com.ortizzakarie.dealfinder.model.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
 import com.ortizzakarie.dealfinder.model.repository.remote.api.CheapSharkApi
@@ -11,6 +12,8 @@ import java.io.IOException
  */
 private const val CHEAPSHARK_STARTING_PAGE_INDEX = 1
 
+
+//TODO: Create a Unit Test for this class based on the stack overflow post i found.
 class CheapSharkPagingSource(
     private val cheapSharkApi: CheapSharkApi,
     private val query: String
@@ -28,10 +31,12 @@ class CheapSharkPagingSource(
                 prevKey = if (position == CHEAPSHARK_STARTING_PAGE_INDEX) null else position - 1,
                 nextKey = if (games.isEmpty()) null else position + 1
             )
-        } catch (exception: IOException) {
-            LoadResult.Error(exception)
-        } catch (exception: HttpException) {
-            LoadResult.Error(exception)
+        } catch (IOEx: IOException) {
+            Log.d("CheapSharkPagingSource", "Failed to load pages, IO Exception: ${IOEx.message}")
+            LoadResult.Error(IOEx)
+        } catch (httpEx: HttpException) {
+            Log.d("CheapSharkPagingSource", "Failed to load pages, http Exception code: ${httpEx.code()}")
+            LoadResult.Error(httpEx)
         }
 
     }

@@ -3,14 +3,17 @@ package com.ortizzakarie.dealfinder.viewModel.searchResult
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
 import com.ortizzakarie.dealfinder.model.repository.CheapSharkRepository
+import com.ortizzakarie.dealfinder.model.repository.CheapSharkRepositoryInterface
 
 /**
  * Created by Zakarie Ortiz on 1/11/21.
  */
 class SearchResultViewModel @ViewModelInject constructor(
-    private val repository: CheapSharkRepository,
+    private val repository: CheapSharkRepositoryInterface,
     @Assisted state: SavedStateHandle
 ) : ViewModel() {
 
@@ -21,11 +24,15 @@ class SearchResultViewModel @ViewModelInject constructor(
     //games is a reactive val that is "activated" whenever currentQuery has it's values changed.
     // the following function will call the repository to view the search results of the currentQuery string.
     val games = currentQuery.switchMap { queryString ->
-        repository.getSearchResultsListGameLookup(queryString).cachedIn(viewModelScope)
+
+        repository.searchGameByTitle(queryString).cachedIn(viewModelScope)
     }
 
-    //searchGames is called whenever the user submits a search query.
-    fun searchGames(query: String) {
+    //searchForGames is called whenever the user submits a search query.
+    fun searchForGames(query: String) {
+        if (query.isEmpty()) {
+            return
+        }
         currentQuery.value = query
     }
 

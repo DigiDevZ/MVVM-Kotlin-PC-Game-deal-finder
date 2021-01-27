@@ -2,7 +2,6 @@ package com.ortizzakarie.dealfinder.viewModel.searchResult
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
@@ -12,15 +11,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.ortizzakarie.dealfinder.R
 import com.ortizzakarie.dealfinder.databinding.FragmentSearchResultBinding
 import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
+import com.ortizzakarie.dealfinder.utils.ValidationUtil
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListAdapter
 import com.ortizzakarie.dealfinder.viewModel.searchResult.adapter.GameListLoadStateAdapter
 import com.ortizzakarie.dealfinder.viewModel.searchResult.searchView.EmptySubmitSearchView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.item_game_listing.*
 
 /**
  * Created by Zakarie Ortiz on 1/11/21.
@@ -89,8 +91,14 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
     }
 
     override fun onItemClick(game: GameListLookup) {
-        val action = SearchResultFragmentDirections.actionSearchResultFragmentToGameDetailsFragment(game, game.external)
-        findNavController().navigate(action)
+
+        val extras = FragmentNavigatorExtras(
+            iv_gameThumbnail to game.thumb,
+            tv_gameTitle to game.external
+        )
+
+        val action = SearchResultFragmentDirections.actionSearchResultFragmentToGameDetailsFragment(game = game, gameTitle = game.external)
+        findNavController().navigate(action, extras)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -107,12 +115,12 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result), GameList
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
 
-                    if (query.isEmpty() || query.isBlank()) {
+                    if (!ValidationUtil.validateSearchQuery(query)) {
                         displayToast(getString(R.string.search_empty_search_field), Toast.LENGTH_SHORT)
                         customSearchView.clearFocus()
                     }else {
                         binding.rvGames.scrollToPosition(0)
-                        viewModel.searchGames(query)
+                        viewModel.searchForGames(query)
                         customSearchView.clearFocus()
                     }
                 }

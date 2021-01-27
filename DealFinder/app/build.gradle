@@ -49,11 +49,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$testExtJunitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-
-    // Material Components for Android
+    // Material Design Components for Android
     implementation "com.google.android.material:material:$materialDesignVersion"
 
     // Navigation Component
@@ -75,6 +71,24 @@ dependencies {
 
     // Paging 3
     implementation "androidx.paging:paging-runtime:$pagingVersion"
+
+
+    // Testing Libraries
+
+    //Local (test) Unit test
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+
+    //Instrumented (androidTest) Unit test
+    androidTestImplementation "androidx.test.ext:junit:$testExtJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.google.truth:truth:$truthVersion"
+
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$daggerHiltTestVersion"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$daggerHiltTestVersion"
 
 }
 
