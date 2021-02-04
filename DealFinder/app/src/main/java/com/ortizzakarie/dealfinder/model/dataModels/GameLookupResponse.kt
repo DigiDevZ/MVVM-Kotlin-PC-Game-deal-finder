@@ -7,33 +7,31 @@ import kotlinx.android.parcel.Parcelize
  * Created by Zakarie Ortiz on 1/10/21.
  */
 @Parcelize
-data class GameLookup(
-    val info: GameInfo,
-    val cheapestPriceEver: GameCheapestPriceEver,
-    val deals: GameDeal
+data class GameLookupResponse(
+    val info: GameInfoResponse,
+    val cheapestPriceEver: GameCheapestPriceEverResponse,
+    val deals: List<GameDealResponse>
 ) : Parcelable {
 
     @Parcelize
-    data class GameInfo(
+    data class GameInfoResponse(
         val title: String,
         val steamAppID: String
     ) : Parcelable
 
     @Parcelize
-    data class GameCheapestPriceEver(
+    data class GameCheapestPriceEverResponse(
         val price: String,
         val date: Int
     ) : Parcelable
 
     @Parcelize
-    data class GameDeal(
+    data class GameDealResponse(
         val storeID: String,
         val dealID: String,
         val price: String,
         val retailPrice: String,
         val savings: String
     ) : Parcelable
-
-    val gameBasicDetails get() = "Title: ${info.title} \nCheapest Price Ever: ${cheapestPriceEver.price}"
 
 }

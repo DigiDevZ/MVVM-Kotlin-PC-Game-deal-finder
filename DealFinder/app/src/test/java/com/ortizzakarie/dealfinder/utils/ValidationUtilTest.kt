@@ -1,7 +1,6 @@
 package com.ortizzakarie.dealfinder.utils
 
 import com.google.common.truth.Truth.assertThat
-import com.ortizzakarie.dealfinder.utils.ValidationUtil
 import org.junit.Test
 
 /**

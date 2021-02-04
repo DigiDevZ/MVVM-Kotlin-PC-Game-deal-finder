@@ -2,7 +2,7 @@ package com.ortizzakarie.dealfinder.model.paging
 
 import android.util.Log
 import androidx.paging.PagingSource
-import com.ortizzakarie.dealfinder.model.dataModels.GameListLookup
+import com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse
 import com.ortizzakarie.dealfinder.model.repository.remote.api.CheapSharkApi
 import retrofit2.HttpException
 import java.io.IOException
@@ -17,9 +17,9 @@ private const val CHEAPSHARK_STARTING_PAGE_INDEX = 1
 class CheapSharkPagingSource(
     private val cheapSharkApi: CheapSharkApi,
     private val query: String
-) : PagingSource<Int, GameListLookup>() {
+) : PagingSource<Int, GameListLookupResponse>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GameListLookup> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GameListLookupResponse> {
 
         val position = params.key ?: CHEAPSHARK_STARTING_PAGE_INDEX
 
@@ -35,7 +35,10 @@ class CheapSharkPagingSource(
             Log.d("CheapSharkPagingSource", "Failed to load pages, IO Exception: ${IOEx.message}")
             LoadResult.Error(IOEx)
         } catch (httpEx: HttpException) {
-            Log.d("CheapSharkPagingSource", "Failed to load pages, http Exception code: ${httpEx.code()}")
+            Log.d(
+                "CheapSharkPagingSource",
+                "Failed to load pages, http Exception code: ${httpEx.code()}"
+            )
             LoadResult.Error(httpEx)
         }
 
