@@ -6,7 +6,6 @@ import com.ortizzakarie.dealfinder.model.repository.FakeCheapSharkRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
@@ -16,7 +15,6 @@ import org.mockito.MockitoAnnotations
 @ExperimentalCoroutinesApi
 class SearchResultViewModelTest {
 
-    //No need for tests since this view model has only one purpose right now.
 
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()

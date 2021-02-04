@@ -37,7 +37,7 @@ class SearchResultViewModel @ViewModelInject constructor(
         private const val CURRENT_TITLE_QUERY = "current_title_query"
 
         //TODO: Give the search results fragment a "search for game" UI element that is displayed when the fragment is opened for the first time.
-        // this will happen when a home fragment is introduced.
+        // this will happen when a home fragment is implemented.
         private const val DEFAULT_TITLE_QUERY = ""
     }
 }

@@ -14,7 +14,8 @@ import javax.inject.Singleton
  * Created by Zakarie Ortiz on 1/11/21.
  */
 @Singleton
-class CheapSharkRepository @Inject constructor(private val cheapSharkApi: CheapSharkApi) : CheapSharkRepositoryInterface {
+class CheapSharkRepository @Inject constructor(private val cheapSharkApi: CheapSharkApi) :
+    CheapSharkRepositoryInterface {
 
     override fun searchGameByTitle(titleQuery: String) =
         Pager(
@@ -23,7 +24,7 @@ class CheapSharkRepository @Inject constructor(private val cheapSharkApi: CheapS
                 maxSize = 60,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { CheapSharkPagingSource(cheapSharkApi, titleQuery)}
+            pagingSourceFactory = { CheapSharkPagingSource(cheapSharkApi, titleQuery) }
         ).liveData
 
 

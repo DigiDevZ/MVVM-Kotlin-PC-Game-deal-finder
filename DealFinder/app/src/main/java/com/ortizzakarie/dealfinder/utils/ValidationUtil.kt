@@ -5,7 +5,6 @@ package com.ortizzakarie.dealfinder.utils
  */
 object ValidationUtil {
 
-
     /**
      * Test cases
      *
@@ -13,8 +12,7 @@ object ValidationUtil {
      *  - the query is blank or empty
      */
 
-    fun validateSearchQuery(query: String) : Boolean {
-
+    fun validateSearchQuery(query: String): Boolean {
         return !(query.isEmpty() || query.isBlank())
     }
 }

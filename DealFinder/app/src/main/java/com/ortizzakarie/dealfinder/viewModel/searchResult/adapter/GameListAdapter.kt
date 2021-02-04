@@ -23,9 +23,10 @@ import com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse
  *
  */
 
-class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAdapter<GameListLookupResponse, GameListAdapter.GameViewHolder>(
-    GAME_COMPARATOR
-) {
+class GameListAdapter(private val listener: OnItemClickListener) :
+    PagingDataAdapter<GameListLookupResponse, GameListAdapter.GameViewHolder>(
+        GAME_COMPARATOR
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val binding =
@@ -77,13 +78,12 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
                 tvGameTitle.text = game.external
                 tvGameTitle.transitionName = game.external
 
-                tvGameDiscountPrice.text = game.cheapest
+                val gameDiscountPriceMessage = "As low as: $${game.cheapest}"
+                tvGameDiscountPrice.text = gameDiscountPriceMessage
 
-                //TODO: Change the two below when I figure out how to update and get that specific data.
+                //TODO: Change the two below when I figure out how to get that specific data while retrieving the list of games.
                 tvGameRetailPrice.isVisible = false
                 tvGameDiscountPercentage.isVisible = false
-//                tvGameRetailPrice.text = "DEV 404"
-//                tvGameDiscountPercentage.text = "DEV 404"
             }
         }
 
@@ -95,13 +95,19 @@ class GameListAdapter(private val listener: OnItemClickListener)  : PagingDataAd
     }
 
     companion object {
-        //All adapters extending PagingDataAdapter must provide their own COMPARATOR object.
+        //All adapters extending PagingDataAdapter must provide their own comparator object, using DiffUtil.ItemCallback.
         private val GAME_COMPARATOR = object : DiffUtil.ItemCallback<GameListLookupResponse>() {
 
-            override fun areItemsTheSame(oldItem: GameListLookupResponse, newItem: GameListLookupResponse) =
+            override fun areItemsTheSame(
+                oldItem: GameListLookupResponse,
+                newItem: GameListLookupResponse
+            ) =
                 oldItem.gameID == newItem.gameID
 
-            override fun areContentsTheSame(oldItem: GameListLookupResponse, newItem: GameListLookupResponse) =
+            override fun areContentsTheSame(
+                oldItem: GameListLookupResponse,
+                newItem: GameListLookupResponse
+            ) =
                 oldItem == newItem
         }
     }

@@ -21,8 +21,6 @@ interface CheapSharkApi {
         @Query("title") title: String
     ): List<GameListLookupResponse>
 
-    //TODO: Add the other api endpoints in here.
-
     @GET("games")
     suspend fun searchGameDealsByGameId(
         @Query("id") id: Int

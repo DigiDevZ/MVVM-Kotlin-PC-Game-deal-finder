@@ -35,7 +35,10 @@ class CheapSharkPagingSource(
             Log.d("CheapSharkPagingSource", "Failed to load pages, IO Exception: ${IOEx.message}")
             LoadResult.Error(IOEx)
         } catch (httpEx: HttpException) {
-            Log.d("CheapSharkPagingSource", "Failed to load pages, http Exception code: ${httpEx.code()}")
+            Log.d(
+                "CheapSharkPagingSource",
+                "Failed to load pages, http Exception code: ${httpEx.code()}"
+            )
             LoadResult.Error(httpEx)
         }
 

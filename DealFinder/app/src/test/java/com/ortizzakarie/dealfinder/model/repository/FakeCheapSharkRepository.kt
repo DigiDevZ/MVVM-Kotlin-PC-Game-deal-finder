@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import com.ortizzakarie.dealfinder.model.dataModels.GameListLookupResponse
+import com.ortizzakarie.dealfinder.model.dataModels.GameLookupResponse
+import com.ortizzakarie.dealfinder.utils.Resource
 
 /**
  * Created by Zakarie Ortiz on 1/15/21.
@@ -34,6 +36,10 @@ class FakeCheapSharkRepository :
 
     override fun searchGameByTitle(titleQuery: String): LiveData<PagingData<GameListLookupResponse>> {
         return pagedGames
+    }
+
+    override suspend fun searchGameDetailsByGameId(idQuery: Int): Resource<GameLookupResponse> {
+        TODO("Not yet implemented")
     }
 
 

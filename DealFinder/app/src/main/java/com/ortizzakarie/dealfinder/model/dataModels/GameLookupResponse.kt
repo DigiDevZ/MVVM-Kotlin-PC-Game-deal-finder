@@ -34,6 +34,4 @@ data class GameLookupResponse(
         val savings: String
     ) : Parcelable
 
-    val gameBasicDetails get() = "Title: ${info.title} \nCheapest Price Ever: ${cheapestPriceEver.price}"
-
 }

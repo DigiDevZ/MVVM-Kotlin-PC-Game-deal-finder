@@ -10,7 +10,7 @@ import androidx.appcompat.widget.SearchView
 
 /**
  * Custom class for extending search view so I can implement code to give it a empty submit listener.
- * Problem SearchView does not return a submit event if the query is empty or blank by default.
+ * Problem: Base SearchView does not return a submit event if the query is empty or blank by default.
  */
 
 class EmptySubmitSearchView : SearchView {

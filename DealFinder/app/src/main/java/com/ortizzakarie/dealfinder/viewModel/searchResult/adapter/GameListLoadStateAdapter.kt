@@ -11,10 +11,12 @@ import com.ortizzakarie.dealfinder.databinding.GameLoadStateFooterBinding
 /**
  * Created by Zakarie Ortiz on 1/11/21.
  */
-class GameListLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<GameListLoadStateAdapter.LoadStateViewHolder>() {
+class GameListLoadStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<GameListLoadStateAdapter.LoadStateViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
-        val binding = GameLoadStateFooterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            GameLoadStateFooterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LoadStateViewHolder(binding)
     }
 
@@ -23,7 +25,7 @@ class GameListLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter
     }
 
     inner class LoadStateViewHolder(private val binding: GameLoadStateFooterBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.btnRetry.setOnClickListener {
